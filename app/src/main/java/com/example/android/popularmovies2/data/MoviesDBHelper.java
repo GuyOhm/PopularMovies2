@@ -4,12 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static com.example.android.popularmovies2.data.MoviesContract.MovieEntry.COLUMN_POSTER;
+import static com.example.android.popularmovies2.data.MoviesContract.MovieEntry.COLUMN_IMAGE;
 import static com.example.android.popularmovies2.data.MoviesContract.MovieEntry.COLUMN_RATING;
 import static com.example.android.popularmovies2.data.MoviesContract.MovieEntry.COLUMN_RELEASE_DATE;
 import static com.example.android.popularmovies2.data.MoviesContract.MovieEntry.COLUMN_SYNOPSIS;
 import static com.example.android.popularmovies2.data.MoviesContract.MovieEntry.COLUMN_TITLE;
-import static com.example.android.popularmovies2.data.MoviesContract.MovieEntry.COLUMN_TMDB_ID;
 import static com.example.android.popularmovies2.data.MoviesContract.MovieEntry.TABLE_MOVIE;
 import static com.example.android.popularmovies2.data.MoviesContract.MovieEntry._ID;
 
@@ -29,11 +28,10 @@ public class MoviesDBHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_MOVIE_TABLE = "CREATE TABLE " +
                 TABLE_MOVIE + "(" +
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_TMDB_ID + " TEXT NOT NULL, " +
                 COLUMN_TITLE + " TEXT NOT NULL, " +
-                COLUMN_POSTER + " BLOB, " +
+                COLUMN_IMAGE + " BLOB, " +
                 COLUMN_SYNOPSIS + " TEXT, " +
-                COLUMN_RATING + " INTEGER, " +
+                COLUMN_RATING + " TEXT, " +
                 COLUMN_RELEASE_DATE + " TEXT);";
 
         // Execute the SQL statement

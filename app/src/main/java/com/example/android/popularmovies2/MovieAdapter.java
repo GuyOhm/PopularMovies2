@@ -1,6 +1,8 @@
 package com.example.android.popularmovies2;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.android.popularmovies2.model.Movie;
-import com.example.android.popularmovies2.utilities.NetworkUtils;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -17,6 +17,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
+
+    private static final String LOG_TAG = MovieAdapter.class.getSimpleName();
 
     private ArrayList<Movie> mMovies;
     private Context mContext;
@@ -44,14 +46,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
         Movie movie = mMovies.get(position);
-        // Display picture using Picasso library
+        // Display picture using byte array from movie object
         if (movie != null) {
-            Picasso
-                    .with(mContext)
-                    .load(String.valueOf(NetworkUtils.buildPosterUrl(movie.getPoster())))
-                    .placeholder(R.mipmap.ic_launcher)
-                    .error(R.mipmap.ic_launcher)
-                    .into(holder.posterImageView);
+            byte[] imageByteArray = movie.getImage();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
+            holder.posterImageView.setImageBitmap(bitmap);
         }
     }
 

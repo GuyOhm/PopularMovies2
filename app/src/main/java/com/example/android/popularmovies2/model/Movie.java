@@ -9,18 +9,30 @@ import android.os.Parcelable;
 
 public class Movie implements Parcelable {
 
+    private String id;
     private String title;
-    private String poster;
     private String synopsis;
     private String rating;
     private String releaseDate;
+    // This member variable will allow to store directly the poster image
+    private byte[] image;
 
-    public Movie(String title, String poster, String synopsis, String rating, String releaseDate) {
+    public Movie(String id, String title, String synopsis, String rating,
+                 String releaseDate, byte[] image) {
+        this.id = id;
         this.title = title;
-        this.poster = poster;
         this.synopsis = synopsis;
         this.rating = rating;
         this.releaseDate = releaseDate;
+        this.image = image;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -29,14 +41,6 @@ public class Movie implements Parcelable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getPoster() {
-        return poster;
-    }
-
-    public void setPoster(String poster) {
-        this.poster = poster;
     }
 
     public String getSynopsis() {
@@ -63,10 +67,18 @@ public class Movie implements Parcelable {
         this.releaseDate = releaseDate;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
-        return "Title: " + this.getTitle() + "\n" +
-                "Poster: " + this.getPoster() + "\n" +
+        return "id: " + this.getId() + "\n" +
+                "Title: " + this.getTitle() + "\n" +
                 "Synopsis: " + this.getSynopsis() + "\n" +
                 "Rating: " + this.getRating() + "\n" +
                 "Release date: " + this.getReleaseDate() + "\n";
@@ -79,19 +91,21 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
         dest.writeString(this.title);
-        dest.writeString(this.poster);
         dest.writeString(this.synopsis);
         dest.writeString(this.rating);
         dest.writeString(this.releaseDate);
+        dest.writeByteArray(this.image);
     }
 
-    private Movie(Parcel in) {
+    protected Movie(Parcel in) {
+        this.id = in.readString();
         this.title = in.readString();
-        this.poster = in.readString();
         this.synopsis = in.readString();
         this.rating = in.readString();
         this.releaseDate = in.readString();
+        this.image = in.createByteArray();
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {

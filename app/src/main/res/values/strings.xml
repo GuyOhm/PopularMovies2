@@ -5,4 +5,8 @@
     <string name="no_movie_selected">No movie has been selected</string>
     <string name="error_loading_movies">Error loading movies</string>
     <string name="no_network">No network connection</string>
+    <string name="trailers_label">Trailers</string>
+    <string name="reviews_label">Reviews</string>
+    <string name="play_movie_trailer_desc">Play movie trailer</string>
+    <string name="menu_sort_by_favorite">Favorites</string>
 </resources>
